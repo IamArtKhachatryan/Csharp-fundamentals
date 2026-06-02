@@ -25,10 +25,11 @@
                 _temp[i] = _coordinats[i];
             _coordinats = _temp;        
         }
-        public void Pop()
+        public (int,int) Pop()
         {
             if (IsEmpty()) throw new InvalidOperationException("Cannot pop: stack is empty");
                 _count--;
+            return _coordinats[_count];
         }
 
         public (int,int) Peek()

@@ -17,6 +17,7 @@
         private static bool checker(string? input)
         {
             if (string.IsNullOrEmpty(input)) return false;
+            if (input.Length % 2 == 1) return false;
             MyStack stack = new MyStack();
             for (int i = 0; i < input.Length; i++)
             {
@@ -24,12 +25,11 @@
                     stack.Push(input[i]); continue;
                 }
                 if (stack.IsEmpty()) return false;
-                switch (stack.Peek(), input[i])
+                switch (stack.Pop(), input[i])
                 {
                     case ('(', ')'):
                     case ('{', '}'):
                     case ('[', ']'):
-                        stack.Pop();
                         break;
                     default: return false;
                 }

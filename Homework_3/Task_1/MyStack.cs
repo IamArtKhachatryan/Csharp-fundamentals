@@ -25,10 +25,11 @@
                 _temp[i] = _chars[i];
             _chars = _temp;        
         }
-        public void Pop()
+        public char Pop()
         {
             if (IsEmpty()) throw new InvalidOperationException("Cannot pop: stack is empty");
                 _count--;
+            return _chars[_count];
         }
 
         public char Peek()
