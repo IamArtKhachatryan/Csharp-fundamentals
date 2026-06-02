@@ -19,11 +19,11 @@ namespace Task_2
             ValidateArguments(a, x, y);
             PrintArray(a);
             Console.WriteLine();
-            FillArrayRecursive(a, x, y, value);
+            FillArrayRecursive.Fill(a, x, y, value);
             PrintArray(a);
             Console.WriteLine();
             value = 9;
-            FillArrayIterative(a, x, y, value);
+            FillArrayIterative.Fill(a, x, y, value);
             PrintArray(a);
         }
 
@@ -34,48 +34,7 @@ namespace Task_2
             if (x < 0 || x >= a.GetLength(0) || y < 0 || y >= a.GetLength(1)) { throw new ArgumentOutOfRangeException("X or/and Y are out of range"); }
         }
 
-        private static void FillArrayIterative(int[,] array, int x, int y, int v)
-        {
-            int targetValue = array[x, y];
-            if (targetValue == v) return;
-            MyStack stack = new MyStack();
-            stack.Push((x, y));
 
-            while (!stack.IsEmpty())
-            {
-                var (cx, cy) = stack.Pop();
-
-                if (cx < 0 || cx >= array.GetLength(0) || cy < 0 || cy >= array.GetLength(1)) continue;
-                if (array[cx, cy] != targetValue) continue;
-
-                array[cx, cy] = v;
-
-                stack.Push((cx + 1, cy));
-                stack.Push((cx - 1, cy));
-                stack.Push((cx, cy + 1));
-                stack.Push((cx, cy - 1));
-            }
-        }
-
-        private static void FillArrayRecursive(int [,] array, int x, int y, int v)
-        {   
-            int targetValue = array[x, y];
-            if (targetValue == v) return;
-            array[x, y] = v;
-            if (x + 1 < array.GetLength(0) && array[x + 1, y] == targetValue)
-                FillArrayRecursive(array, x + 1, y, v);
-
-            if (x - 1 >= 0 && array[x - 1, y] == targetValue)
-                FillArrayRecursive(array, x - 1, y, v);
-
-            if (y + 1 < array.GetLength(1) && array[x, y + 1] == targetValue)
-                FillArrayRecursive(array, x, y + 1, v);
-
-            if (y - 1 >= 0 && array[x, y - 1] == targetValue)
-                FillArrayRecursive(array, x, y - 1, v);
-            return;
-
-        }
 
         static void PrintArray(int[,] array)
         {
